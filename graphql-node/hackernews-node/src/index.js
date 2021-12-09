@@ -39,7 +39,7 @@ const resolvers = {
         },
         updateLink: (parent, args) => {
             let link = links.find((link) => link.id === args.id)
-            if (link === undefined ) {
+            if (link === undefined) {
                 return link
             }
             link.description = args.description
@@ -48,7 +48,7 @@ const resolvers = {
         },
         deleteLink: (parent, args) => {
             let index = links.findIndex((link) => link.id === args.id)
-            if (index === -1 ) {
+            if (index === -1) {
                 return undefined
             }
             console.log(links[index])
