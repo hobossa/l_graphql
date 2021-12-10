@@ -19,7 +19,7 @@ mutation PostMutation(
 `;
 
 const CreateLink = () => {
-    const navigate = useMutation();
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState({
         description: '',
