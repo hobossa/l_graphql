@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { setContext } from '@apollo/client/link/context';
 
 // 1
 import {
@@ -17,9 +18,19 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:4000'
 });
 
+const authLink = setContext((_, { headers }) => {
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTYzOTEyMjE2M30.FNPDo8I4YEXj7k2VAXze0T91QBBvPMBkOu8oXXZ2f2g';
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  }
+});
+
 // 3
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 });
 
