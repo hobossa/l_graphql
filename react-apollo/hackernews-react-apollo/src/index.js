@@ -5,6 +5,7 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter } from 'react-router-dom';
+import { AUTH_TOKEN } from './constants';
 
 // 1
 import {
@@ -20,7 +21,8 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTYzOTEyMjE2M30.FNPDo8I4YEXj7k2VAXze0T91QBBvPMBkOu8oXXZ2f2g';
+  // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlhdCI6MTYzOTEyMjE2M30.FNPDo8I4YEXj7k2VAXze0T91QBBvPMBkOu8oXXZ2f2g';
+  const token = localStorage.getItem(AUTH_TOKEN);
   return {
     headers: {
       ...headers,
