@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useMutation, gql } from '@apollo/client';
 import { AUTH_TOKEN } from '../constants';
 
@@ -32,7 +32,7 @@ const LOGIN_MUTATION = gql`
 
 
 const Login = () => {
-    const navigate = useNavigate();
+    const history = useHistory();
     const [formState, setFormState] = useState({
         login: true,
         email: '',
@@ -47,7 +47,7 @@ const Login = () => {
         },
         onCompleted: ({ login }) => {
             localStorage.setItem(AUTH_TOKEN, login.token);
-            navigate('/');
+            history.push('/');
         }
     });
 
@@ -59,7 +59,7 @@ const Login = () => {
         },
         onCompleted: ({ signup }) => {
             localStorage.setItem(AUTH_TOKEN, signup.token);
-            navigate('/');
+            history.push('/');
         }
     });
 

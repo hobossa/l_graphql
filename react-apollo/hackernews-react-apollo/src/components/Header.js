@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { AUTH_TOKEN } from '../constants';
 
 const Header = () => {
-    const navigate = useNavigate();
+    const history = useHistory();
     const authToken = localStorage.getItem(AUTH_TOKEN);
     return (
         <div className="flex pa1 justify-between nowrap orange">
@@ -41,7 +41,7 @@ const Header = () => {
                         className="ml1 pointer black"
                         onClick={() => {
                             localStorage.removeItem(AUTH_TOKEN);
-                            navigate(`/`);
+                            history.push(`/`);
                         }}
                     >
                         logout

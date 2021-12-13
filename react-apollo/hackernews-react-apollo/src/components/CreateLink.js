@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useMutation, gql } from '@apollo/client';
 
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { FEED_QUERY } from './LinkList';
 import { LINKS_PER_PAGE } from '../constants';
@@ -22,7 +22,7 @@ mutation PostMutation(
 `;
 
 const CreateLink = () => {
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const [formState, setFormState] = useState({
         description: '',
@@ -62,7 +62,7 @@ const CreateLink = () => {
                 }
             });
         },
-        onCompleted: () => navigate('/')
+        onCompleted: () => history.push('/new/1')
     });
 
     return (

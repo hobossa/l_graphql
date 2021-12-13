@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LinkList from './LinkList';
 import CreateLink from './CreateLink';
 import Header from './Header';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from './Login';
 import Search from './Search';
 
@@ -12,7 +12,7 @@ class App extends Component {
       <div className="center w85">
         <Header />
         <div className="ph3 pv1 background-gray">
-          <Routes>
+          <Switch>
             <Route exact path="/" element={<LinkList />} />
             <Route
               exact
@@ -21,7 +21,7 @@ class App extends Component {
             />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/search" element={<Search />} />
-          </Routes>
+          </Switch>
         </div>
       </div>
     );
