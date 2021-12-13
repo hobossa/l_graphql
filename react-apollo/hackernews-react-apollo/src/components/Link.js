@@ -28,6 +28,12 @@ const VOTE_MUTATION = gql`
 
 const Link = (props) => {
     const { link } = props;
+
+    const take = LINKS_PER_PAGE;
+    const skip = 0;
+    const orderBy = { createdAt: 'desc' };
+    const authToken = localStorage.getItem(AUTH_TOKEN);
+
     const [vote] = useMutation(VOTE_MUTATION, {
         variables: {
             linkId: link.id
@@ -36,7 +42,12 @@ const Link = (props) => {
         // https://www.apollographql.com/docs/react/caching/cache-configuration/#after-mutations
         update(cache, { data: { vote } }) {
             const { feed } = cache.readQuery({
-                query: FEED_QUERY
+                query: FEED_QUERY,
+                variables: {
+                    take,
+                    skip,
+                    orderBy
+                }
             });
 
             const updatedLinks = feed.links.map((feedLink) => {
@@ -55,14 +66,16 @@ const Link = (props) => {
                     feed: {
                         links: updatedLinks
                     }
+                },
+                variables: {
+                    take,
+                    skip,
+                    orderBy
                 }
             });
         }
     });
-    const authToken = localStorage.getItem(AUTH_TOKEN);
-    const take = LINKS_PER_PAGE;
-    const skip = 0;
-    const orderBy = { createdAt: 'desc' };
+    
 
     return (
         <div className="flex mt2 items-start">
